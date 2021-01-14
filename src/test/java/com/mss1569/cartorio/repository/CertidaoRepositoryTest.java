@@ -22,6 +22,7 @@ class CertidaoRepositoryTest {
     @Autowired
     private CartorioRepository cartorioRepository;
     private Cartorio cartorio;
+    private Certidao certidao;
 
     @BeforeEach
     void setUp() {
@@ -30,6 +31,11 @@ class CertidaoRepositoryTest {
                 .endereco("rua x")
                 .build();
         cartorioRepository.save(cartorio);
+
+        certidao = Certidao.builder()
+                .nome("certidao y")
+                .cartorio(cartorio)
+                .build();
     }
 
     @AfterEach
@@ -39,25 +45,16 @@ class CertidaoRepositoryTest {
 
     @Test
     void save() {
-        Certidao certidaoToSave = Certidao.builder()
-                .nome("certidao y")
-                .cartorio(cartorio)
-                .build();
-
-        Certidao certidaoSaved = certidaoRepository.save(certidaoToSave);
+        Certidao certidaoSaved = certidaoRepository.save(certidao);
 
         Assertions.assertThat(certidaoSaved).isNotNull();
         Assertions.assertThat(certidaoSaved.getId()).isNotNull();
-        Assertions.assertThat(certidaoSaved.getNome()).isEqualTo(certidaoToSave.getNome());
+        Assertions.assertThat(certidaoSaved.getNome()).isEqualTo(certidao.getNome());
     }
 
     @Test
     void update() {
-        Certidao certidaoToSave = Certidao.builder()
-                .nome("certidao y")
-                .cartorio(cartorio)
-                .build();
-        Certidao certidaoSaved = certidaoRepository.save(certidaoToSave);
+        Certidao certidaoSaved = certidaoRepository.save(certidao);
 
         certidaoSaved.setNome("certidao rr");
         Certidao certidaoUpdated = certidaoRepository.save(certidaoSaved);
@@ -69,12 +66,7 @@ class CertidaoRepositoryTest {
 
     @Test
     void delete() {
-        Certidao certidaoToSave = Certidao.builder()
-                .nome("certidao y")
-                .cartorio(cartorio)
-                .build();
-
-        Certidao certidaoSaved = certidaoRepository.save(certidaoToSave);
+        Certidao certidaoSaved = certidaoRepository.save(certidao);
         certidaoRepository.delete(certidaoSaved);
 
         Optional<Certidao> certidaoOptional = certidaoRepository.findById(certidaoSaved.getId());
@@ -83,12 +75,7 @@ class CertidaoRepositoryTest {
 
     @Test
     void findById() {
-        Certidao certidaoToSave = Certidao.builder()
-                .nome("certidao y")
-                .cartorio(cartorio)
-                .build();
-
-        Certidao certidaoSaved = certidaoRepository.save(certidaoToSave);
+        Certidao certidaoSaved = certidaoRepository.save(certidao);
         Optional<Certidao> certidaoOptional = certidaoRepository.findById(certidaoSaved.getId());
 
         Assertions.assertThat(certidaoOptional).isNotEmpty();
@@ -96,12 +83,7 @@ class CertidaoRepositoryTest {
 
     @Test
     void findByIdNotFound() {
-        Certidao certidaoToSave = Certidao.builder()
-                .nome("certidao y")
-                .cartorio(cartorio)
-                .build();
-
-        certidaoRepository.save(certidaoToSave);
+        certidaoRepository.save(certidao);
         Optional<Certidao> certidaoOptional = certidaoRepository.findById(8888L);
 
         Assertions.assertThat(certidaoOptional).isEmpty();
@@ -109,11 +91,7 @@ class CertidaoRepositoryTest {
 
     @Test
     void findByCartorioId() {
-        Certidao certidaoToSave = Certidao.builder()
-                .nome("certidao y")
-                .cartorio(cartorio)
-                .build();
-        certidaoRepository.save(certidaoToSave);
+        certidaoRepository.save(certidao);
 
         Page<Certidao> certidaoPage = certidaoRepository.findByCartorioId(cartorio.getId(), PageRequest.of(0, 10));
 
@@ -122,11 +100,7 @@ class CertidaoRepositoryTest {
 
     @Test
     void findByCartorioIdNotFound() {
-        Certidao certidaoToSave = Certidao.builder()
-                .nome("certidao y")
-                .cartorio(cartorio)
-                .build();
-        certidaoRepository.save(certidaoToSave);
+        certidaoRepository.save(certidao);
 
         Page<Certidao> certidaoPage = certidaoRepository.findByCartorioId(8888L, PageRequest.of(0, 10));
 
@@ -135,26 +109,16 @@ class CertidaoRepositoryTest {
 
     @Test
     void findByIdAndCartorioId() {
-        Certidao certidaoToSave = Certidao.builder()
-                .nome("certidao y")
-                .cartorio(cartorio)
-                .build();
-
-        certidaoRepository.save(certidaoToSave);
-        Optional<Certidao> certidaoOptional = certidaoRepository.findByIdAndCartorioId(certidaoToSave.getId(), cartorio.getId());
+        certidaoRepository.save(certidao);
+        Optional<Certidao> certidaoOptional = certidaoRepository.findByIdAndCartorioId(certidao.getId(), cartorio.getId());
 
         Assertions.assertThat(certidaoOptional).isNotEmpty();
-        Assertions.assertThat(certidaoOptional.get().getNome()).isEqualTo(certidaoToSave.getNome());
+        Assertions.assertThat(certidaoOptional.get().getNome()).isEqualTo(certidao.getNome());
     }
 
     @Test
     void findByIdAndCartorioIdNotFound() {
-        Certidao certidaoToSave = Certidao.builder()
-                .nome("certidao y")
-                .cartorio(cartorio)
-                .build();
-
-        certidaoRepository.save(certidaoToSave);
+        certidaoRepository.save(certidao);
         Optional<Certidao> certidaoOptional = certidaoRepository.findByIdAndCartorioId(8888L, 9999L);
 
         Assertions.assertThat(certidaoOptional).isEmpty();

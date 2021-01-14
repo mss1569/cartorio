@@ -2,6 +2,7 @@ package com.mss1569.cartorio.repository;
 
 import com.mss1569.cartorio.domain.Cartorio;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -13,28 +14,29 @@ class CartorioRepositoryTest {
     @Autowired
     private CartorioRepository cartorioRepository;
 
-    @Test
-    void save() {
-        Cartorio cartorioToSave = Cartorio.builder()
+    private Cartorio cartorio;
+
+    @BeforeEach
+    void setUp() {
+        cartorio = Cartorio.builder()
                 .nome("cartorio y")
                 .endereco("rua x")
                 .build();
+    }
 
-        Cartorio cartorioSaved = cartorioRepository.save(cartorioToSave);
+    @Test
+    void save() {
+        Cartorio cartorioSaved = cartorioRepository.save(cartorio);
 
         Assertions.assertThat(cartorioSaved).isNotNull();
         Assertions.assertThat(cartorioSaved.getId()).isNotNull();
-        Assertions.assertThat(cartorioSaved.getNome()).isEqualTo(cartorioToSave.getNome());
-        Assertions.assertThat(cartorioSaved.getEndereco()).isEqualTo(cartorioToSave.getEndereco());
+        Assertions.assertThat(cartorioSaved.getNome()).isEqualTo(cartorio.getNome());
+        Assertions.assertThat(cartorioSaved.getEndereco()).isEqualTo(cartorio.getEndereco());
     }
 
     @Test
     void update() {
-        Cartorio cartorioToSave = Cartorio.builder()
-                .nome("cartorio y")
-                .endereco("rua x")
-                .build();
-        Cartorio cartorioSaved = cartorioRepository.save(cartorioToSave);
+        Cartorio cartorioSaved = cartorioRepository.save(cartorio);
 
         cartorioSaved.setNome("cartorio rr");
         Cartorio cartorioUpdated = cartorioRepository.save(cartorioSaved);
@@ -46,12 +48,7 @@ class CartorioRepositoryTest {
 
     @Test
     void delete() {
-        Cartorio cartorioToSave = Cartorio.builder()
-                .nome("cartorio y")
-                .endereco("rua x")
-                .build();
-
-        Cartorio cartorioSaved = cartorioRepository.save(cartorioToSave);
+        Cartorio cartorioSaved = cartorioRepository.save(cartorio);
         cartorioRepository.delete(cartorioSaved);
 
         Optional<Cartorio> cartorioOptional = cartorioRepository.findById(cartorioSaved.getId());
@@ -60,12 +57,7 @@ class CartorioRepositoryTest {
 
     @Test
     void findById() {
-        Cartorio cartorioToSave = Cartorio.builder()
-                .nome("cartorio y")
-                .endereco("rua x")
-                .build();
-
-        Cartorio cartorioSaved = cartorioRepository.save(cartorioToSave);
+        Cartorio cartorioSaved = cartorioRepository.save(cartorio);
         Optional<Cartorio> cartorioOptional = cartorioRepository.findById(cartorioSaved.getId());
 
         Assertions.assertThat(cartorioOptional).isNotEmpty();
@@ -73,12 +65,7 @@ class CartorioRepositoryTest {
 
     @Test
     void findByIdNotFound() {
-        Cartorio cartorioToSave = Cartorio.builder()
-                .nome("cartorio y")
-                .endereco("rua x")
-                .build();
-
-        cartorioRepository.save(cartorioToSave);
+        cartorioRepository.save(cartorio);
         Optional<Cartorio> cartorioOptional = cartorioRepository.findById(8888L);
 
         Assertions.assertThat(cartorioOptional).isEmpty();

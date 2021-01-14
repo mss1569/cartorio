@@ -1,6 +1,7 @@
 package com.mss1569.cartorio.domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -8,10 +9,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 class CertidaoTest {
 
+    private Certidao certidao;
+
+    @BeforeEach
+    void setUp(){
+        certidao = Certidao.builder().build();
+    }
     @Test
     void getterAndSetterId() {
-        Certidao certidao = Certidao.builder().build();
-
         certidao.setId(3L);
         Assertions.assertThat(certidao.getId()).isEqualTo(3L);
 
@@ -21,8 +26,6 @@ class CertidaoTest {
 
     @Test
     void getterAndSetterNome() {
-        Certidao certidao = Certidao.builder().build();
-
         certidao.setNome("certidao xyz");
         Assertions.assertThat(certidao.getNome()).isEqualTo("certidao xyz");
 
@@ -32,8 +35,6 @@ class CertidaoTest {
 
     @Test
     void getterAndSetterCartorio() {
-        Certidao certidao = Certidao.builder().build();
-
         Cartorio cartorio1 = Cartorio.builder()
                 .id(1L)
                 .build();

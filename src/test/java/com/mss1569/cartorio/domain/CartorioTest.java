@@ -1,6 +1,7 @@
 package com.mss1569.cartorio.domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -8,10 +9,15 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 class CartorioTest {
 
+    private Cartorio cartorio;
+
+    @BeforeEach
+    void setUp(){
+        cartorio = Cartorio.builder().build();
+    }
+
     @Test
     void getterAndSetterId() {
-        Cartorio cartorio = Cartorio.builder().build();
-
         cartorio.setId(3L);
         Assertions.assertThat(cartorio.getId()).isEqualTo(3L);
 
@@ -21,8 +27,6 @@ class CartorioTest {
 
     @Test
     void getterAndSetterNome() {
-        Cartorio cartorio = Cartorio.builder().build();
-
         cartorio.setNome("cartorio xyz");
         Assertions.assertThat(cartorio.getNome()).isEqualTo("cartorio xyz");
 
@@ -32,8 +36,6 @@ class CartorioTest {
 
     @Test
     void getterAndSetterEndereco() {
-        Cartorio cartorio = Cartorio.builder().build();
-
         cartorio.setEndereco("rua x");
         Assertions.assertThat(cartorio.getEndereco()).isEqualTo("rua x");
 
