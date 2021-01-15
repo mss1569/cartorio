@@ -12,7 +12,7 @@ class CartorioTest {
     private Cartorio cartorio;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         cartorio = Cartorio.builder().build();
     }
 

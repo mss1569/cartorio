@@ -12,9 +12,10 @@ class CertidaoTest {
     private Certidao certidao;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         certidao = Certidao.builder().build();
     }
+
     @Test
     void getterAndSetterId() {
         certidao.setId(3L);

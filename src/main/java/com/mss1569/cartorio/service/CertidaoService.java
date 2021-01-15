@@ -53,7 +53,10 @@ public class CertidaoService {
         certidaoRepository.delete(findById(id));
     }
 
-    public Certidao replace(Certidao certidao) {
+    public Certidao replace(Long certidaoId, Certidao certidao) {
+        Certidao certidaoOld = findById(certidaoId);
+        certidao.setId(certidaoOld.getId());
+        certidao.setCartorio(certidaoOld.getCartorio());
         return certidaoRepository.save(certidao);
     }
 }

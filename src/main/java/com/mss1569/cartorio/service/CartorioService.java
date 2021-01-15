@@ -34,7 +34,8 @@ public class CartorioService {
         cartorioRepository.delete(findById(id));
     }
 
-    public Cartorio replace(Cartorio cartorio) {
+    public Cartorio replace(Long cartorioId, Cartorio cartorio) {
+        cartorio.setId(findById(cartorioId).getId());
         return cartorioRepository.save(cartorio);
     }
 }

@@ -121,7 +121,7 @@ class CertidaoServiceTest {
 
     @Test
     void findByIdAndCartorioIdNotFound() {
-        BDDMockito.when(certidaoRepository.findByIdAndCartorioId(ArgumentMatchers.anyLong(),ArgumentMatchers.anyLong()))
+        BDDMockito.when(certidaoRepository.findByIdAndCartorioId(ArgumentMatchers.anyLong(), ArgumentMatchers.anyLong()))
                 .thenReturn(Optional.empty());
 
         Assertions.assertThatExceptionOfType(BadRequestException.class)
@@ -152,7 +152,7 @@ class CertidaoServiceTest {
 
     @Test
     void replace() {
-        Assertions.assertThat(certidaoService.replace(certidao))
+        Assertions.assertThat(certidaoService.replace(certidao.getId(), certidao))
                 .isNotNull().isEqualTo(certidao);
     }
 }

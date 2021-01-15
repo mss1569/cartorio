@@ -92,7 +92,7 @@ class CartorioServiceTest {
 
     @Test
     void replace() {
-        Assertions.assertThat(cartorioService.replace(cartorio))
+        Assertions.assertThat(cartorioService.replace(cartorio.getId(), cartorio))
                 .isNotNull().isEqualTo(cartorio);
     }
 }
