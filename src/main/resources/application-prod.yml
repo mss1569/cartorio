@@ -16,5 +16,10 @@ spring:
     initialSize: 5
     removeAbandoned: true
   jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
     hibernate:
       ddl-auto: update
