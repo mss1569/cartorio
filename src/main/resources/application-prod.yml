@@ -4,6 +4,7 @@ spring:
     username: ${JDBC_DATABASE_USERNAME}
     password: ${JDBC_DATABASE_PASSWORD}
     driverClassName: com.mysql.jdbc.Driver
+    platform: org.hibernate.dialect.MySQLDialect
   jpa:
     properties:
       hibernate:
@@ -11,4 +12,5 @@ spring:
           lob:
             non_contextual_creation: true
     hibernate:
-      ddl-auto: update
+      hbm2ddl:
+        auto: update
