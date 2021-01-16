@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Getter
 @NoArgsConstructor
-public class CertidaoDTO {
-    @NotEmpty(message = "Nome não pode ser vazio!")
-    private String nome;
+public class CertificateDTO {
+    @NotEmpty(message = "Name cannot be empty!")
+    private String name;
 }

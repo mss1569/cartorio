@@ -14,13 +14,13 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Cartorio {
+public class Notary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
-    private String nome;
+    private String name;
     @NotEmpty
-    private String endereco;
+    private String address;
 }
