@@ -4,11 +4,14 @@ import com.mss1569.cartorio.domain.Certificate;
 import com.mss1569.cartorio.domain.Notary;
 import com.mss1569.cartorio.dto.CertificateDTO;
 import com.mss1569.cartorio.dto.NotaryDTO;
+import com.mss1569.cartorio.exception.BadRequestException;
 import com.mss1569.cartorio.service.CertificateService;
 import com.mss1569.cartorio.service.NotaryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.modelmapper.ModelMapper;
 import org.springdoc.api.annotations.ParameterObject;
@@ -50,7 +53,7 @@ public class NotaryController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, return notary"),
-                    @ApiResponse(responseCode = "400", description = "Notary not found")
+                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
             })
     public ResponseEntity<Notary> findById(@PathVariable Long notaryId) {
         return new ResponseEntity<>(notaryService.findById(notaryId), HttpStatus.OK);
@@ -73,7 +76,7 @@ public class NotaryController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, notary updated,return notary"),
-                    @ApiResponse(responseCode = "400", description = "Notary not found")
+                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
             })
     public ResponseEntity<Notary> update(@PathVariable Long notaryId,
                                          @Valid @RequestBody NotaryDTO notaryDTO) {
@@ -88,7 +91,7 @@ public class NotaryController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, notary deleted"),
-                    @ApiResponse(responseCode = "400", description = "Notary not found")
+                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
             })
     public ResponseEntity<Void> delete(@PathVariable Long notaryId) {
         notaryService.delete(notaryId);
@@ -103,7 +106,7 @@ public class NotaryController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, return all certificates from a notary"),
-                    @ApiResponse(responseCode = "400", description = "Notary not found")
+                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
             })
     public Page<Certificate> listAllCertificatesByNotaryId(@PathVariable Long notaryId,
                                                            @ParameterObject Pageable pageable) {
@@ -118,7 +121,7 @@ public class NotaryController {
             },
             responses = {
                     @ApiResponse(responseCode = "201", description = "Successful operation, certificate emitted, return certificate"),
-                    @ApiResponse(responseCode = "400", description = "Notary not found")
+                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
             })
     public ResponseEntity<Certificate> saveCertificate(@PathVariable Long notaryId,
                                                        @Valid @RequestBody CertificateDTO certificateDTO) {
