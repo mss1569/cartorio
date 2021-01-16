@@ -2,10 +2,13 @@ package com.mss1569.cartorio.controller;
 
 import com.mss1569.cartorio.domain.Certificate;
 import com.mss1569.cartorio.dto.CertificateDTO;
+import com.mss1569.cartorio.exception.BadRequestException;
 import com.mss1569.cartorio.service.CertificateService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.modelmapper.ModelMapper;
 import org.springdoc.api.annotations.ParameterObject;
@@ -45,7 +48,7 @@ public class CertificateController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, return certificate"),
-                    @ApiResponse(responseCode = "400", description = "Certificate not found")
+                    @ApiResponse(responseCode = "400", description = "Certificate not found", content = @Content)
             })
     public ResponseEntity<Certificate> findById(@PathVariable Long certificateId) {
         return new ResponseEntity<>(certificateService.findById(certificateId), HttpStatus.OK);
@@ -59,7 +62,7 @@ public class CertificateController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, certificate updated,return certificate"),
-                    @ApiResponse(responseCode = "400", description = "Certificate not found")
+                    @ApiResponse(responseCode = "400", description = "Certificate not found", content = @Content)
             })
     public ResponseEntity<Certificate> update(@PathVariable Long certificateId,
                                               @Valid @RequestBody CertificateDTO certificateDTO) {
@@ -77,7 +80,7 @@ public class CertificateController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, certificate deleted"),
-                    @ApiResponse(responseCode = "400", description = "Certificate not found")
+                    @ApiResponse(responseCode = "400", description = "Certificate not found", content = @Content)
             })
     public ResponseEntity<Certificate> delete(@PathVariable Long certificateId) {
         certificateService.delete(certificateId);
