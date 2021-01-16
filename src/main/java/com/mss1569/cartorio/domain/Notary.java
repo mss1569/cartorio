@@ -2,10 +2,7 @@ package com.mss1569.cartorio.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Getter
@@ -17,6 +14,7 @@ import javax.validation.constraints.NotEmpty;
 public class Notary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
     private Long id;
 
     @NotEmpty
