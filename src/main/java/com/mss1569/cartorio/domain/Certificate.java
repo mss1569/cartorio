@@ -17,8 +17,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Certificate {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "serial")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
