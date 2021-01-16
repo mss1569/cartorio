@@ -61,6 +61,7 @@ public class NotaryController {
 
     @PostMapping
     @Operation(summary = "Creates a notary",
+            tags = {"Notary"},
             responses = {
                     @ApiResponse(responseCode = "201", description = "Successful operation, notary created, return notary"),
             })
