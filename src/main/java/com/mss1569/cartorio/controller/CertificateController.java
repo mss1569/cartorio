@@ -48,7 +48,7 @@ public class CertificateController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, return certificate"),
-                    @ApiResponse(responseCode = "400", description = "Certificate not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
+                    @ApiResponse(responseCode = "400", description = "Certificate not found", content = @Content)
             })
     public ResponseEntity<Certificate> findById(@PathVariable Long certificateId) {
         return new ResponseEntity<>(certificateService.findById(certificateId), HttpStatus.OK);
@@ -62,7 +62,7 @@ public class CertificateController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, certificate updated,return certificate"),
-                    @ApiResponse(responseCode = "400", description = "Certificate not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
+                    @ApiResponse(responseCode = "400", description = "Certificate not found", content = @Content)
             })
     public ResponseEntity<Certificate> update(@PathVariable Long certificateId,
                                               @Valid @RequestBody CertificateDTO certificateDTO) {
@@ -80,7 +80,7 @@ public class CertificateController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, certificate deleted"),
-                    @ApiResponse(responseCode = "400", description = "Certificate not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
+                    @ApiResponse(responseCode = "400", description = "Certificate not found", content = @Content)
             })
     public ResponseEntity<Certificate> delete(@PathVariable Long certificateId) {
         certificateService.delete(certificateId);

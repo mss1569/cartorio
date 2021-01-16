@@ -53,7 +53,7 @@ public class NotaryController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, return notary"),
-                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
+                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content)
             })
     public ResponseEntity<Notary> findById(@PathVariable Long notaryId) {
         return new ResponseEntity<>(notaryService.findById(notaryId), HttpStatus.OK);
@@ -76,7 +76,7 @@ public class NotaryController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, notary updated,return notary"),
-                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
+                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content)
             })
     public ResponseEntity<Notary> update(@PathVariable Long notaryId,
                                          @Valid @RequestBody NotaryDTO notaryDTO) {
@@ -91,7 +91,7 @@ public class NotaryController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, notary deleted"),
-                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
+                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content)
             })
     public ResponseEntity<Void> delete(@PathVariable Long notaryId) {
         notaryService.delete(notaryId);
@@ -106,7 +106,7 @@ public class NotaryController {
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successful operation, return all certificates from a notary"),
-                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
+                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content)
             })
     public Page<Certificate> listAllCertificatesByNotaryId(@PathVariable Long notaryId,
                                                            @ParameterObject Pageable pageable) {
@@ -121,7 +121,7 @@ public class NotaryController {
             },
             responses = {
                     @ApiResponse(responseCode = "201", description = "Successful operation, certificate emitted, return certificate"),
-                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content(schema = @Schema(implementation = BadRequestException.class)))
+                    @ApiResponse(responseCode = "400", description = "Notary not found", content = @Content)
             })
     public ResponseEntity<Certificate> saveCertificate(@PathVariable Long notaryId,
                                                        @Valid @RequestBody CertificateDTO certificateDTO) {
