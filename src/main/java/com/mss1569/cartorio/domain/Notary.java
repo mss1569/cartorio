@@ -13,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 public class Notary {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "serial")
     private Long id;
 
