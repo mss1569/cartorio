@@ -6,6 +6,8 @@
 ### [Heroku - Swagger UI](https://mss1569-cartorio.herokuapp.com/swagger-ui.html)
 
 ### Como rodar:
+
+#### Usando Docker:
 Opção 1: usando H2DB:
 >```docker run --name cartorio -p 8080:8080 mss1569/cartorio```
 
@@ -16,6 +18,13 @@ Opção 2: usando mysql:
 >-e JDBC_DATABASE_URL="jdbc:mysql://HOST:3306/DATABASE?createDatabaseIfNotExist=true" \
 >-e JDBC_DATABASE_USERNAME="user" \
 >-e JDBC_DATABASE_PASSWORD="password" mss1569/cartorio
+>```
+
+#### Usando Maven:
+Por padrão a aplicação ira utilizar o H2DB para utilizar o MySql basta adicionar as variaveis de ambiente exemplificadas na execução com docker.
+>```
+>$ mvn -B package --file pom.xml
+>$ java -jar target/cartorio-0.0.1-SNAPSHOT.jar
 >```
 
 #### [Localhost - Swagger UI](http://localhost:8080/swagger-ui.html)
@@ -59,6 +68,7 @@ Juntamente com a rota de busca de certidões emitidas por cartório:
 - [x] Spring Boot 2.4
 - [x] Spring WEB
 - [x] Spring Data JPA
+- [x] JUnit5
 - [x] Docker
 - [x] Heroku
 - [x] Github Actions
