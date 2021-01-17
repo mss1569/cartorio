@@ -23,8 +23,8 @@ Opção 2: usando mysql:
 #### Usando Maven:
 Por padrão a aplicação ira utilizar o H2DB para utilizar o MySql basta adicionar as variaveis de ambiente exemplificadas na execução com docker.
 >```
->$ mvn -B package --file pom.xml
->$ java -jar target/cartorio-0.0.1-SNAPSHOT.jar
+>mvn -B package --file pom.xml
+>java -jar target/cartorio-0.0.1-SNAPSHOT.jar
 >```
 
 #### [Localhost - Swagger UI](http://localhost:8080/swagger-ui.html)
