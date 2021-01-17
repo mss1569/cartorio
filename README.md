@@ -36,11 +36,11 @@ e pode emitir uma ou varias certidões, cada certidão possui um nome.
 
 ![uml](https://user-images.githubusercontent.com/33636621/104828649-5ada1d00-584a-11eb-9e5c-08ce451ea332.png)
 
-Devido ao fato de que uma certidão só pode ser emitida a partir de um cartório, a rota para criar uma certidão foi colocada como recurso da rota de cartórios:
->```POST /notaries/{notaryId}/certificate```
+Devido ao fato de que uma certidão só pode ser emitida a partir de um cartório, a rota para criar uma certidão foi definida como recurso da rota de cartórios:
+>```POST /notaries/{notaryId}/certificates```
 
 Juntamente com a rota de busca de certidões emitidas por cartório:
->```GET /notaries/{notaryId}/certificate```
+>```GET /notaries/{notaryId}/certificates```
 
 ### Etapas:
 
